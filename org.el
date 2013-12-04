@@ -18,4 +18,4 @@
 
 ;; Set files to sync
 (setq org-mobile-files '((org-agenda-files) "~/org"))
-(setq org-mobile-files-exclude-regexp "flagged.org")
+(setq org-mobile-files-exclude-regexp "flagged.org\\|no-sync")
