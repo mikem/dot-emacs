@@ -10,16 +10,19 @@
 
 (require 'package)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (defvar my-packages '(starter-kit
-		      starter-kit-lisp
-		      starter-kit-bindings
-		      starter-kit-eshell
-		      clojure-mode
-		      clojure-test-mode
-		      nrepl))
+                      starter-kit-lisp
+                      starter-kit-bindings
+                      starter-kit-eshell
+                      clojure-mode
+                      clojure-test-mode
+                      nrepl
+                      workgroups
+                      win-switch
+                      simpleclip))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -39,3 +42,10 @@
     (load-file (expand-file-name file user-init-dir)))
 
 (load-user-file "org.el")
+
+(require 'workgroups)
+
+(require 'win-switch)
+;; (win-switch-setup-keys-ijkl "\C-xo")
+(global-unset-key "\C-xo")
+(global-set-key "\C-xo" 'win-switch-dispatch)
