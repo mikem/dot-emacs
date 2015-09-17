@@ -11,6 +11,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (defvar my-packages '(starter-kit
@@ -22,7 +24,10 @@
                       nrepl
                       workgroups
                       win-switch
-                      simpleclip))
+                      simpleclip
+                      scala-mode2
+                      sbt-mode
+                      ensime))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -49,3 +54,7 @@
 ;; (win-switch-setup-keys-ijkl "\C-xo")
 (global-unset-key "\C-xo")
 (global-set-key "\C-xo" 'win-switch-dispatch)
+
+;; Scala
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
