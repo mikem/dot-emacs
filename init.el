@@ -15,19 +15,26 @@
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(defvar my-packages '(starter-kit
+(defvar my-packages '(;; emacs
+                      starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
                       starter-kit-eshell
-                      clojure-mode
-                      clojure-test-mode
-                      nrepl
                       workgroups
                       win-switch
                       simpleclip
+                      magit
+                      ;; clojure
+                      clojure-mode
+                      clojure-test-mode
+                      nrepl
+                      ;; scala
                       scala-mode2
                       sbt-mode
-                      ensime))
+                      ensime
+                      ;; web
+                      web-mode
+                      scss-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -48,6 +55,14 @@
 
 (load-user-file "org.el")
 
+;; general
+(add-hook 'local-write-file-hooks
+          (lambda ()
+            (delete-trailing-whitespace)
+                           nil))
+
+(global-set-key "\C-c\C-c" 'comment-region)
+
 (require 'workgroups)
 
 (require 'win-switch)
@@ -58,3 +73,17 @@
 ;; Scala
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; Web
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)))
+
+(add-hook 'scss-mode-hook
+          (lambda ()
+            (setq css-indent-offset 2)))
+
+(add-to-list 'auto-mode-alist '("\\.scala.html'" . web-mode))
+(setq web-mode-engines-alis
+      '(("razor" . "\\.scala.html\\'")))

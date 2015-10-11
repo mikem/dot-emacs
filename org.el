@@ -17,7 +17,7 @@
         (car (split-string (buffer-string) "\n" t))))
 
 ;; Set files to sync
-(setq org-mobile-files '((org-agenda-files) "~/org"))
+(setq org-mobile-files '((org-agenda-files) "~/org" "~/org/books" "~/org/builtamont"))
 (setq org-mobile-files-exclude-regexp "flagged.org\\|done.org\\|no-sync")
 
 ;; More options
